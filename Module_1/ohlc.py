@@ -1,21 +1,18 @@
 import datetime
 import pandas as pd
-
+import pylint
 
 df = pd.read_csv('trades.txt', names=['Company', 'Price', 'Amount', 'DateTime'])
 
 df['Dates'] = pd.to_datetime(df['DateTime']).dt.date
 df['Time'] = pd.to_datetime(df['DateTime']).dt.time
 
-
-df = df[(df['Time'] >= datetime.time(7,0,0) ) & (df['Time'] <= datetime.time(23,59,59,999999)) |
-        (df['Time'] >= datetime.time(0,0,0) ) & (df['Time'] <= datetime.time(2,59,59,999999) )]
+df = df[(df['Time'] >= datetime.time(7, 0, 0)) & (df['Time'] <= datetime.time(23, 59, 59, 999999)) |
+        (df['Time'] >= datetime.time(0, 0, 0)) & (df['Time'] <= datetime.time(2, 59, 59, 999999))]
 
 df['DateTime'] = pd.to_datetime(df['DateTime'])
-
 df = df.set_index('DateTime')
-df = df.drop(columns= ['Dates','Time', 'Amount'])
-
+df = df.drop(columns=['Dates', 'Time', 'Amount'])
 
 def trades(df1):
     tf = input('INput timeframe')
