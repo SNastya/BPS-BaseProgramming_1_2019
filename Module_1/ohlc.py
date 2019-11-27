@@ -19,71 +19,60 @@ df = df.set_index('DateTime')
 df = df.drop(columns= ['Dates','Time', 'Amount'])
 
 
-sber_df = df[df['Company'] == 'SBER']
-aapl_df = df[df['Company'] == 'AAPL']
-amzn_df = df[df['Company'] == 'AMZN']
+def trades_5(df1):
+    print( '5MIN DATA' )
+    num_tickets = int(input('Input number of tickets: '))
+    data = pd.DataFrame()
+    for i in range(num_tickets):
+        ticket = input('Input name of Tickets: ')
+        t = ticket
+        ticket = df1[df1['Company'] == ticket]
+        ticket = ticket['Price'].resample('5Min').ohlc()
+        ticket['Company'] = t
+        data = data.append(ticket)
+    data = data.query("open != 'NaN'")
+    data.sort_values(["DateTime"], inplace=True)
+    data = data.reset_index()
+    data = data.set_index('Company')
+    data = data.reset_index()
+    return data
 
+def trades_30(df1):
+    print( '30MIN DATA' )
+    num_tickets = int(input('Input number of tickets: '))
+    data = pd.DataFrame()
+    for i in range(num_tickets):
+        ticket = input('Input name of Tickets: ')
+        t = ticket
+        ticket = df1[df1['Company'] == ticket]
+        ticket = ticket['Price'].resample('30Min').ohlc()
+        ticket['Company'] = t
+        data = data.append(ticket)
+    data = data.query("open != 'NaN'")
+    data.sort_values(["DateTime"], inplace=True)
+    data = data.reset_index()
+    data = data.set_index('Company')
+    data = data.reset_index()
+    return data
 
+def trades_240(df1):
+    print( '240MIN DATA' )
+    num_tickets = int(input('Input number of tickets: '))
+    data = pd.DataFrame()
+    for i in range(num_tickets):
+        ticket = input('Input name of Tickets: ')
+        t = ticket
+        ticket = df1[df1['Company'] == ticket]
+        ticket = ticket['Price'].resample('240Min').ohlc()
+        ticket['Company'] = t
+        data = data.append(ticket)
+    data = data.query("open != 'NaN'")
+    data.sort_values(["DateTime"], inplace=True)
+    data = data.reset_index()
+    data = data.set_index('Company')
+    data = data.reset_index()
+    return data
 
-sber_df_5 = sber_df['Price'].resample('5Min').ohlc()
-aapl_df_5 = aapl_df['Price'].resample('5Min').ohlc()
-amzn_df_5 = amzn_df['Price'].resample('5Min').ohlc()
-
-sber_df_30 = sber_df['Price'].resample('30Min').ohlc()
-aapl_df_30 = aapl_df['Price'].resample('30Min').ohlc()
-amzn_df_30 = amzn_df['Price'].resample('30Min').ohlc()
-
-sber_df_240 = sber_df['Price'].resample('240Min').ohlc()
-aapl_df_240 = aapl_df['Price'].resample('240Min').ohlc()
-amzn_df_240 = amzn_df['Price'].resample('240Min').ohlc()
-
-
-
-
-
-sber_df_5['Company'] = 'SBER'
-aapl_df_5['Company'] = 'AAPl'
-amzn_df_5['Company'] = 'AMZN'
-
-sber_df_30['Company'] = 'SBER'
-aapl_df_30['Company'] = 'AAPl'
-amzn_df_30['Company'] = 'AMZN'
-
-sber_df_240['Company'] = 'SBER'
-aapl_df_240['Company'] = 'AAPl'
-amzn_df_240['Company'] = 'AMZN'
-
-
-data_5 = aapl_df_5.append(amzn_df_5)
-data_5 = data_5.append(sber_df_5)
-
-data_30 = aapl_df_30.append(amzn_df_30)
-data_30 = data_30.append(sber_df_30)
-
-data_240 = aapl_df_240.append(amzn_df_240)
-data_240 = data_240.append(sber_df_240)
-
-
-data_5 = data_5.query("low != 'NaN'")
-data_5.sort_values(["DateTime"], inplace=True)
-data_5 = data_5.reset_index()
-data_5 = data_5.set_index('Company')
-data_5 = data_5.reset_index()
-
-data_30 = data_30.query("low != 'NaN'")
-data_30.sort_values(["DateTime"], inplace=True)
-data_30 = data_30.reset_index()
-data_30 = data_30.set_index('Company')
-data_30 = data_30.reset_index()
-
-data_240 = data_240.query("low != 'NaN'")
-data_240.sort_values(["DateTime"], inplace=True)
-data_240 = data_240.reset_index()
-data_240 = data_240.set_index('Company')
-data_240 = data_240.reset_index()
-
-data_5.to_csv
-data_30.to_csv
-data_240.to_csv
-
-
+print(trades_5(df))
+print(trades_30( df))
+print(trades_240(df))
