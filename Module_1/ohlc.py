@@ -1,6 +1,5 @@
 import datetime
 import pandas as pd
-import pylint
 
 df = pd.read_csv('trades.txt', names=['Company', 'Price', 'Amount', 'DateTime'])
 
@@ -14,8 +13,9 @@ df['DateTime'] = pd.to_datetime(df['DateTime'])
 df = df.set_index('DateTime')
 df = df.drop(columns=['Dates', 'Time', 'Amount'])
 
+
 def trades(df1):
-    tf = input('INput timeframe')
+    tf = input('Input timeframe')
     tf += 'Min'
     num_tickets = int(input('Input number of tickets: '))
     data = pd.DataFrame()
@@ -32,5 +32,3 @@ def trades(df1):
     data = data.set_index('Company')
     data = data.reset_index()
     return data.to_csv()
-
-
