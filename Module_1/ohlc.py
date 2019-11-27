@@ -1,7 +1,6 @@
 import datetime
 import pandas as pd
 
-pd.options.display.max_rows = 1500000
 
 df = pd.read_csv('trades.txt', names=['Company', 'Price', 'Amount', 'DateTime'])
 
@@ -36,4 +35,5 @@ def trades(df1):
     data = data.set_index('Company')
     data = data.reset_index()
     return data.to_csv()
+
 
