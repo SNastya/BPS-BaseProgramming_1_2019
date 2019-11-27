@@ -1,8 +1,6 @@
 import csv
 import datetime
 import pandas as pd
-import numpy as np
-from pandas import date_range, DataFrame
 
 pd.options.display.max_rows = 1500000
 
