@@ -1,4 +1,3 @@
-import csv
 import datetime
 import pandas as pd
 
@@ -37,6 +36,10 @@ amzn_df_30 = amzn_df['Price'].resample('30Min').ohlc()
 sber_df_240 = sber_df['Price'].resample('240Min').ohlc()
 aapl_df_240 = aapl_df['Price'].resample('240Min').ohlc()
 amzn_df_240 = amzn_df['Price'].resample('240Min').ohlc()
+
+
+
+
 
 sber_df_5['Company'] = 'SBER'
 aapl_df_5['Company'] = 'AAPl'
